@@ -9626,10 +9626,10 @@ var Game;
             Resources.textureGooglePlay = new Engine.Texture(PATH_GOOGLE_PLAY_LOGO, false, true);
             Resources.textureGooglePlay.preserved = true;
         }
-        var volumeScale = 0.5;
+        var volumeScale = 0.1;
         Resources.bgms[0] = new Engine.AudioPlayer(PATH_MUSIC);
         Resources.bgms[0].preserved = true;
-        Resources.bgms[0].volume = Resources.bgms[0].restoreVolume = 3.1 * volumeScale;
+        Resources.bgms[0].volume = Resources.bgms[0].restoreVolume = 2.1 * volumeScale;
         Resources.bgms[0].loopStart = 5.5 * 0;
         Resources.bgms[0].loopEnd = 44.137930;
         Game.bgms.push(Resources.bgms[0]);
