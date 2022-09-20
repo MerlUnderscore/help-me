@@ -7550,6 +7550,7 @@ var Game;
             if (Game.SceneFreezer.paused)
                 Game.PauseButton.instance.onPressed();
             Game.LevelPauseUI.instance.text.str = Game.LevelPauseUI.STR;
+            Game.LevelTimer.instance.dialogFrame.sprite2.enabled = true;
         };
         Level.prototype.onStepUpdate = function () {
             _super.prototype.onStepUpdate.call(this);
@@ -7560,7 +7561,7 @@ var Game;
                             Game.PauseButton.instance.onPressed();
                         Level.practiceFinished = true;
                         Game.LevelPauseUI.instance.text.str = "STAGE TIME: " + Game.LevelTimer.instance.text.str;
-                        Game.LevelTimer.instance.text.str = "";
+                        Game.LevelTimer.instance.dialogFrame.sprite2.enabled = false;
                     }
                     else if (!Game.SceneFreezer.stoped) {
                         if (Level.index == Game.MAX_LEVELS) {
@@ -8973,11 +8974,14 @@ var Game;
             _this.text.yAlignView = Utils.AnchorAlignment.START;
             _this.text.xAligned = 0;
 
-            new Game.SpeedrunDialogFrame();
+            _this.dialogFrame = new Game.SpeedrunDialogFrame();
             _this.fix();
             return _this;
         }
         LevelTimer.prototype.fix = function () {
+            this.textLevelName.enabled = true;
+            this.text.enabled = true;
+
             if (!Game.SceneFreezer.paused) {
 				this.textLevelName.xAlignView = Utils.AnchorAlignment.END;
                 this.textLevelName.yAlignView = Utils.AnchorAlignment.START;
@@ -8990,6 +8994,11 @@ var Game;
 				this.text.yAligned = 9;
             }
             else {
+                if (Game.Level.practiceFinished){
+                    this.textLevelName.enabled = false;
+                    this.text.enabled = false;
+                }
+
 				this.textLevelName.xAlignView = Utils.AnchorAlignment.MIDDLE;
                 this.textLevelName.yAlignView = Utils.AnchorAlignment.END;
                 this.textLevelName.xAligned = 0.5;
